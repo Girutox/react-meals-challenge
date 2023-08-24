@@ -1,4 +1,5 @@
 import styles from './MealItem.module.scss';
+import MealItemForm from './MealItemForm';
 
 export default function MealItem() {
   return <li>
@@ -9,7 +10,7 @@ export default function MealItem() {
         <div className={styles.price}>$22.99</div>
       </div>
       <div>
-        <span>ADD</span>
+        <MealItemForm />
       </div>
     </div>
   </li>;
