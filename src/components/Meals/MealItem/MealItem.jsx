@@ -1,13 +1,13 @@
 import styles from './MealItem.module.scss';
 import MealItemForm from './MealItemForm';
 
-export default function MealItem() {
+export default function MealItem({ title, subtitle, price }) {
   return <li>
     <div className={styles.meal}>
       <div>
-        <h3>Sushi</h3>
-        <div className={styles.description}>Finest fish and veggies</div>
-        <div className={styles.price}>$22.99</div>
+        <h3>{title}</h3>
+        <div className={styles.description}>{subtitle}</div>
+        <div className={styles.price}>${price}</div>
       </div>
       <div>
         <MealItemForm />

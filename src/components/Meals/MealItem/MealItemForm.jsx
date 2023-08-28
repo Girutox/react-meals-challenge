@@ -1,10 +1,32 @@
+import { useRef } from 'react';
 import styles from './MealItemForm.module.scss';
+import Input from '../../UI/Input';
 
 export default function MealItemForm() {
+  const amountRef = useRef();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    console.log(amountRef.current.value);
+  }
+
   return (
-    <form className={styles.form}>
-      <label htmlFor="amount">Amount</label>
-      <input type="text" id='amount' name='amount' value={1} />
+    <form className={styles.form} onSubmit={submitHandler}>
+      <Input
+        ref={amountRef}
+        label='Amount'
+        input={
+          {
+            id: 'amount',
+            type: 'number',
+            name: 'amount',
+            min: 1,
+            max: 5,
+            step: 1,
+            defaultValue: 1
+          }
+        } />
       <button>
         + Add
       </button>
