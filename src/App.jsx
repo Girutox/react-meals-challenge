@@ -5,6 +5,8 @@ import styles from './App.module.scss';
 import Meals from "./components/Meals/Meals";
 
 function App() {
+  const rootValue = 'Value from APP.js!';
+
   return (
     <>
       <Header />
@@ -12,7 +14,7 @@ function App() {
         <div className={styles['main-image']}>
           <img src={MealsImg} alt="A table full of food" />
         </div>
-        <Meals />
+        <Meals rootValue={rootValue} />
       </main>
     </>
   );

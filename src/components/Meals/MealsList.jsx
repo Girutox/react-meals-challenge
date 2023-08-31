@@ -30,7 +30,7 @@ const DUMMY_MEALS = [
   },
 ];
 
-export default function MealsList() {
+export default function MealsList({rootValue}) {
   return (
     <section className={styles.meals}>
       <Card>
@@ -38,6 +38,7 @@ export default function MealsList() {
           {DUMMY_MEALS.map((item) => {
             return (
               <MealItem
+                rootValue={rootValue}
                 key={item.id}
                 title={item.name}
                 subtitle={item.description}
