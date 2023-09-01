@@ -1,6 +1,12 @@
+import { useContext } from 'react';
+import CartContext from '../../store/CartContext';
+
 import styles from './MealsSummary.module.scss';
 
 const MealsSummary = () => {
+  const cartContext = useContext(CartContext);
+  console.log('MealSummary values:', cartContext);
+
   return (
     <section className={styles.summary}>
       <h2>Delicious Food, Delivered To You</h2>
