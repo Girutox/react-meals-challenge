@@ -4,8 +4,7 @@ import MealsImg from './assets/meals.jpg';
 import styles from './App.module.scss';
 import Meals from "./components/Meals/Meals";
 
-import CartContext from "./store/CartContext";
-import { useState } from "react";
+import CartProvider from "./store/CartProvider";
 
 function App() {
   const rootValue = 'Value from APP.js!';
@@ -16,7 +15,7 @@ function App() {
 
   return (
     <>
-      <CartContext.Provider value={0}>
+      <CartProvider>
         <Header />
         <main>
           <div className={styles['main-image']}>
@@ -24,7 +23,7 @@ function App() {
           </div>
           <Meals rootValue={rootValue} onPrintChildValue={printChildValueHandler} />
         </main>
-      </CartContext.Provider>
+      </CartProvider>
     </>
   );
 }
