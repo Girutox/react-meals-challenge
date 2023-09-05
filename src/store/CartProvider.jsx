@@ -3,9 +3,7 @@ import CartContext from "./CartContext";
 
 //DEFAULT STATE
 const defaultState = {
-  mealItems: [],
-  addMealItemHandler: (mealItem) => {},
-  deleteMealItemHandler: (mealId) => {}
+  mealItems: []
 }
 
 // Funcion reductora

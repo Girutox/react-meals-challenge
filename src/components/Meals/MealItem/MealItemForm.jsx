@@ -1,36 +1,18 @@
-import { useRef, useState, useContext } from 'react';
+import { useRef } from 'react';
 import styles from './MealItemForm.module.scss';
 import Input from '../../UI/Input';
-import CartContext from '../../../store/CartContext';
 
-export default function MealItemForm({rootValue, onPrintChildValue}) {
-  const cartContext = useContext(CartContext);
-  console.log('CART CONTEXT:', cartContext);
-
-  // const childValue = 'Value from MealItemForm.jsx';
-  // onPrintChildValue(childValue);
-  // const [count, setCount] = useState(0);
-
+export default function MealItemForm({addMeal}) { 
   const amountRef = useRef();
-
-  // console.log("Value received from APP.JS: ", rootValue);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    cartContext.addMealItemHandler({
-      name: 'Sushi',
-      price: 22.99,
-      amount: amountRef.current.value
-    })
-
-    // setCount(count + 1);
-    // console.log(amountRef.current.value);
+    addMeal(+amountRef.current.value);
   }
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>
-      {/* {count} */}
       <Input
         ref={amountRef}
         label='Amount'
