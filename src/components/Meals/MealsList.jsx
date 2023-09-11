@@ -41,6 +41,7 @@ export default function MealsList({rootValue, onPrintChildValue}) {
                 onPrintChildValue={onPrintChildValue}
                 rootValue={rootValue}
                 key={item.id}
+                id={item.id}
                 title={item.name}
                 subtitle={item.description}
                 price={item.price} />

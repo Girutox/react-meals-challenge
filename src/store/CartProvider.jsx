@@ -9,9 +9,17 @@ const defaultState = {
 // Funcion reductora
 const cartReducer = (state, action) => {
   if (action.type === 'add') {
+    const currentItems = [...state.mealItems];
+    const existingItem = currentItems.find((item) => item.id === action.mealItem.id);
+
+    if (existingItem) {
+      existingItem.amount += action.mealItem.amount;
+    } else {
+      currentItems.push(action.mealItem);
+    }
+
     return {
-      ...state,
-      mealItems: [...state.mealItems, action.mealItem]
+      mealItems: currentItems
     }
   } else if (action.type === 'delete') {
 
