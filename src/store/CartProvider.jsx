@@ -3,13 +3,15 @@ import CartContext from "./CartContext";
 
 //DEFAULT STATE
 const defaultState = {
-  mealItems: []
+  mealItems: [],
+  totalAmount: 0
 }
 
 // Funcion reductora
 const cartReducer = (state, action) => {
-  if (action.type === 'add') {
-    const currentItems = [...state.mealItems];
+  const currentItems = [...state.mealItems];
+
+  if (action.type === 'add') {    
     const existingItem = currentItems.find((item) => item.id === action.mealItem.id);
 
     if (existingItem) {
@@ -18,14 +20,33 @@ const cartReducer = (state, action) => {
       currentItems.push(action.mealItem);
     }
 
+    const totalAmount = currentItems.reduce((prev, current) => prev + (current.amount * current.price), 0);
+
     return {
-      mealItems: currentItems
+      mealItems: currentItems,
+      totalAmount
     }
   } else if (action.type === 'delete') {
+    const existingItem = currentItems.find((item) => item.id === action.mealId);
 
-  } else {
+    let newMeals = null;
 
+    if (existingItem.amount === 1) {
+      newMeals = currentItems.filter(item => item.id !== action.mealId)
+    } else {
+      existingItem.amount -= 1;
+      newMeals = currentItems;      
+    }
+
+    const totalAmount = newMeals.reduce((prev, current) => prev + (current.amount * current.price), 0);
+
+    return {
+      mealItems: newMeals,
+      totalAmount
+    }
   }
+
+  return {...state};
 }
 
 const CartProvider = (props) => {
@@ -35,10 +56,15 @@ const CartProvider = (props) => {
     dispatchCartAction({type: 'add', mealItem})
   }
 
+  const deleteMealItemHandler = (mealId) => {
+    dispatchCartAction({type: 'delete', mealId})
+  }
+
   const cartProviderValue = {
     mealItems: cartState.mealItems,
+    totalAmount: cartState.totalAmount,
     addMealItemHandler,
-    deleteMealItemHandler: (mealId) => { }
+    deleteMealItemHandler
   };
 
   return (

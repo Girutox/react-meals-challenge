@@ -2,32 +2,36 @@ import { useContext } from 'react';
 import Modal from '../UI/Modal';
 
 import styles from './Cart.module.scss';
-import CartIitem from './CartItem';
+import CartItem from './CartItem';
 import CartContext from '../../store/CartContext';
 
 const Cart = ({ onClose }) => {
-  const { mealItems } = useContext(CartContext);
+  const { mealItems, totalAmount, addMealItemHandler, deleteMealItemHandler } = useContext(CartContext);
+
+  const mealItemsToRender = <ul className={styles['cart-items']}>
+    {mealItems.map(item => {
+      return (
+        <CartItem
+          key={item.id}
+          id={item.id}
+          name={item.name}
+          price={item.price}
+          amount={item.amount}
+          addMeal={addMealItemHandler}
+          removeMeal={deleteMealItemHandler} />
+      )
+    })}
+  </ul>;
 
   return (
     <Modal onClose={onClose}>
       <section>
-        <ul className={styles['cart-items']}>
-          {mealItems.map(item => {
-            return (
-              <CartIitem
-                key={item.id}
-                id={item.id}
-                name={item.name}
-                price={item.price}
-                amount={item.amount} />
-            )
-          })}
-        </ul>
+        {mealItemsToRender}
       </section>
       <section>
         <div className={styles.total}>
           <span>Total Amount</span>
-          <span>$0</span>
+          <span>${totalAmount.toFixed(2)}</span>
         </div>
         <div className={styles.actions}>
           <button className={styles['button--alt']} onClick={onClose}>Close</button>

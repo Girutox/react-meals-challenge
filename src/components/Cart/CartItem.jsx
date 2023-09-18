@@ -1,6 +1,6 @@
 import styles from './CartItem.module.scss';
 
-const CartIitem = ({name, price, amount}) => {
+const CartItem = ({id, name, price, amount, addMeal, removeMeal}) => {
   return <li className={styles['cart-item']}>
     <div>
       <h2>{name}</h2>
@@ -10,10 +10,17 @@ const CartIitem = ({name, price, amount}) => {
       </div>
     </div>
     <div className={styles.actions}>
-      <button>-</button>
-      <button>+</button>
+      <button onClick={() => { removeMeal(id) }}>-</button>
+      <button onClick={() => {
+          addMeal({
+            id,
+            name,
+            price,
+            amount: 1
+          })
+        }}>+</button>
     </div>
   </li>
 }
 
-export default CartIitem;
+export default CartItem;
