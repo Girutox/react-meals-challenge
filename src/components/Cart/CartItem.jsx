@@ -1,6 +1,8 @@
 import styles from './CartItem.module.scss';
 
 const CartItem = ({id, name, price, amount, addMeal, removeMeal}) => {
+  
+
   return <li className={styles['cart-item']}>
     <div>
       <h2>{name}</h2>

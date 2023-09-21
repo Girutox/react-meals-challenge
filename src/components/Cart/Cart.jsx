@@ -1,24 +1,22 @@
-import { useContext } from 'react';
 import Modal from '../UI/Modal';
 
 import styles from './Cart.module.scss';
 import CartItem from './CartItem';
-import CartContext from '../../store/CartContext';
+
+import { useSelector, useDispatch } from 'react-redux';
 
 const Cart = ({ onClose }) => {
-  const { mealItems, totalAmount, addMealItemHandler, deleteMealItemHandler } = useContext(CartContext);
+  const count = useSelector((state) => state.counter.value);
 
   const mealItemsToRender = <ul className={styles['cart-items']}>
-    {mealItems.map(item => {
+    {[].map(item => {
       return (
         <CartItem
           key={item.id}
           id={item.id}
           name={item.name}
           price={item.price}
-          amount={item.amount}
-          addMeal={addMealItemHandler}
-          removeMeal={deleteMealItemHandler} />
+          amount={item.amount} />
       )
     })}
   </ul>;
@@ -31,7 +29,8 @@ const Cart = ({ onClose }) => {
       <section>
         <div className={styles.total}>
           <span>Total Amount</span>
-          <span>${totalAmount.toFixed(2)}</span>
+          <span>$0</span>
+          <h4>REDUX VALUE: {count}</h4>
         </div>
         <div className={styles.actions}>
           <button className={styles['button--alt']} onClick={onClose}>Close</button>

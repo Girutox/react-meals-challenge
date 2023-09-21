@@ -2,13 +2,11 @@ import { useContext, useEffect, useState } from 'react';
 import CartIcon from './CartIcon';
 
 import styles from './HeaderCardButton.module.scss';
-import CartContext from '../../store/CartContext';
 import Cart from '../Cart/Cart';
 
 export default function HeaderCardButton() {
   const [showCart, setShowCart] = useState(false);
   const [includeBump, setIncludeBump] = useState(false);
-  const { mealItems } = useContext(CartContext);
 
   const buttonClasses = `${styles.button} ${includeBump && styles.bump}`;
 
@@ -20,19 +18,19 @@ export default function HeaderCardButton() {
     setShowCart(false);
   }
 
-  useEffect(() => {
-    if (!mealItems.length) return;
+  // useEffect(() => {
+  //   if (!mealItems.length) return;
 
-    setIncludeBump(true);
+  //   setIncludeBump(true);
 
-    const timerId = setTimeout(() => {
-      setIncludeBump(false);
-    }, 300);
+  //   const timerId = setTimeout(() => {
+  //     setIncludeBump(false);
+  //   }, 300);
 
-    return () => {
-      clearTimeout(timerId);
-    }
-  }, [mealItems])
+  //   return () => {
+  //     clearTimeout(timerId);
+  //   }
+  // }, [mealItems])
 
   return (
     <>
@@ -42,7 +40,7 @@ export default function HeaderCardButton() {
         </div>
         <span>Your Cart</span>
         <div className={styles.badge}>
-          {mealItems.length}
+          0
         </div>
       </button>
       {showCart && <Cart onClose={hideCartHandler} />}

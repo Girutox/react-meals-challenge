@@ -1,18 +1,9 @@
-import { useContext } from 'react';
-import CartContext from '../../../store/CartContext';
 import styles from './MealItem.module.scss';
 import MealItemForm from './MealItemForm';
 
 export default function MealItem({ id, title: name, subtitle: description, price }) {
-  const cartContext = useContext(CartContext);
-
   const addMeal = (amount) => {
-    cartContext.addMealItemHandler({
-      id,
-      name,
-      price,
-      amount
-    })
+    
   }
 
   return <li>
