@@ -4,9 +4,11 @@ import styles from './Cart.module.scss';
 import CartItem from './CartItem';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement, incrementByAmount } from '../../store/counterSlice';
 
 const Cart = ({ onClose }) => {
   const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
 
   const mealItemsToRender = <ul className={styles['cart-items']}>
     {[].map(item => {
@@ -35,6 +37,9 @@ const Cart = ({ onClose }) => {
         <div className={styles.actions}>
           <button className={styles['button--alt']} onClick={onClose}>Close</button>
           <button className={styles.button}>Order</button>
+
+          <button onClick={() => { dispatch(increment()) }}>+</button>
+          <button>-</button>
         </div>
       </section>
     </Modal>
